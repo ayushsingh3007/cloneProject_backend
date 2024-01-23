@@ -1,8 +1,9 @@
 const express=require('express')
+const app1=express.Router()
 const { registerController, loginController, prepcourses, completestore, auth, createcheckout, buy } = require('../controller/userController')
 const auther = require('../autherfolder/authentic')
 const cors=require('cors')
- const app1=express.Router()
+ 
 
 
  app1.use(cors())
