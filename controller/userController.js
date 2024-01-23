@@ -1,4 +1,4 @@
-const bcrypt=require('bcrypt')
+
 const jwt=require('jsonwebtoken')
 
 
@@ -9,8 +9,7 @@ const { reg } = require('../Schemafolders/UserSchema.js');
 const saltround=10;
 const secretkey="cloneproject"
 const stripe=require("stripe")("sk_test_51OK7daSAg3lXy8qLZhheRgo3J3APhi6R52IAFx3uP0NwcRhA5MXL1WkNx9p73iwoMSHmNRsEJ6LyVwnhkcrQYGIB00X6Jf63tM")
-
-
+const bcrypt=require('bcrypt')
 let course1=""
 const prepcourses=async (req,res)=>{
     for(let i=0;i<pastmock.length;i++){
