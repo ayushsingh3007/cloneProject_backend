@@ -1,13 +1,13 @@
 const express=require('express')
 const app=express()
-const dotenv=require('dotenv')
+
 const cors=require('cors')
 const bodyparser=require('body-parser')
-const app1 = require('./routing/userRouters')
-const { Connection } = require('./dbConnection/dbConnection')
+const app1 = require('./routing/userRouters.js')
+const { Connection } = require('./dbConnection/dbConnection.js')
 
 
-dotenv.config()
+
 const port=4000
 
 app.use(cors({
