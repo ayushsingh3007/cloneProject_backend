@@ -1,11 +1,11 @@
-const bcrypt=require('bcrypt')
+
 const jwt=require('jsonwebtoken')
 const express=require('express')
 const prepcourse=require('../controller/data')
 const { backendSchema } = require('../schema/backendSchema')
 const { registerSchema } = require('../schema/userSchema')
 const auther = require('../authentic/authentic')
-
+const bcrypt=require('bcrypt')
 const app1=express.Router()
 
 

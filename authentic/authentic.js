@@ -1,7 +1,7 @@
 const jwt=require("jsonwebtoken")
 // const dotenv=require('dotenv')
 // dotenv.config();
-const secretkey='cloneproject'
+const secretkey='cloneProject'
 // const cors=require("cors")
 const auther=(req,res,next)=>{
     const BToken=req.headers['authorization'];
