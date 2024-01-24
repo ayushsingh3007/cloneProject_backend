@@ -7,6 +7,7 @@ const { registerSchema } = require('../schema/userSchema')
 const auther = require('../authentic/authentic')
 const bcrypt=require('bcrypt')
 const Prepcourses = require('./data')
+const cors=require('cors')
 const app1=express.Router()
 
 
