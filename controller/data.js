@@ -1,4 +1,4 @@
-const pastmock=[
+const Prepcourses=[
     {
     id:1,
     catdivd:"past mock tests",

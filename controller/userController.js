@@ -1,11 +1,12 @@
 
 const jwt=require('jsonwebtoken')
 const express=require('express')
-const prepcourse=require('../controller/data')
+
 const { backendSchema } = require('../schema/backendSchema')
 const { registerSchema } = require('../schema/userSchema')
 const auther = require('../authentic/authentic')
 const bcrypt=require('bcrypt')
+const Prepcourses = require('./data')
 const app1=express.Router()
 
 
@@ -18,8 +19,8 @@ const course1=""
 const storeItem=""
 
 app1.get("/courses",async (req,res)=>{
-    for(let i=0;i<prepcourse.length;i++){
-        let rt=await backendSchema.create(prepcourse[i])
+    for(let i=0;i<Prepcourses.length;i++){
+        let rt=await backendSchema.create(Prepcourses[i])
 
     }
     return res.send("successfully stored")
