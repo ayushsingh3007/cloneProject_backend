@@ -137,7 +137,7 @@ app1.get("/auth",auther,async (req, res) => {
 
 
 
-router1.get("/mobdata",async (req,res)=>{
+app1.get("/mobdata",async (req,res)=>{
     
    
     const dbres4=await dumy.find({})
@@ -251,7 +251,7 @@ const lineItems = products.map((prod) => ({
     });
 
     res.json({ id: session.id });
-    const ressee=coursestr.create(storeitem[0])
+    const ressee=coursetype.create(storeitem[0])
     console.log(ressee)
   } catch (error) {
     console.error('Error creating checkout session:', error);
