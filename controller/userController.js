@@ -8,11 +8,12 @@ const auther = require('../authentic/authentic')
 const bcrypt=require('bcryptjs')
 const Prepcourses = require('./data')
 const cors=require('cors')
+const { coursetype } = require('../schema/courseSchema')
 const app1=express.Router()
 
 
 app1.use(cors())
-// const stripe=require("stripe")("sk_test_51OK7daSAg3lXy8qLZhheRgo3J3APhi6R52IAFx3uP0NwcRhA5MXL1WkNx9p73iwoMSHmNRsEJ6LyVwnhkcrQYGIB00X6Jf63tM")
+const stripe=require('stripe')("sk_test_51OK7daSAg3lXy8qLZhheRgo3J3APhi6R52IAFx3uP0NwcRhA5MXL1WkNx9p73iwoMSHmNRsEJ6LyVwnhkcrQYGIB00X6Jf63tM")
 const saltround=10
 const secretkey="cloneProject"
 
@@ -133,6 +134,149 @@ app1.get("/auth",auther,async (req, res) => {
    console.log("user authorized")
    
 })
+
+
+
+router1.get("/mobdata",async (req,res)=>{
+    
+   
+    const dbres4=await dumy.find({})
+    console.log(dbres4)
+    
+    return res.send(dbres4)
+})
+
+//const stripe = require('stripe')('your_stripe_secret_key'); // Replace with your actual Stripe secret key
+const htmlsuccesspage = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: blue;
+            margin-left:20%;
+            margin-bottom:30px;
+            
+        }
+        .cont{
+            display:flex;
+            align-items:center;
+            flex-direction:column;
+            border:2px;
+            
+        }
+       button{
+            
+            margin:45%;
+            margin-top:30px;
+       }
+    </style>
+    <title>payment</title>
+</head>
+<body>
+<div className="cont">
+<div>
+    <h1>Payment successfull and course confirmed</h1>
+    <div>
+    // <a href="https://moonlit-cranachan-da39c6.netlify.app/">
+     <button className=" bot1"><NavLink to="/">continue with your course</NavLink></button>
+    </div>
+    </div>
+    </body>
+</html>
+`;
+
+
+
+app1.post("/createcheckout1", async (req, res) => {
+    console.log("hiiiii")
+  const  {products}  = await req.body;
+//   const num=parseInt(products)
+//   const specificdata=arr.filter((item)=>{item.id==num})
+  console.log(products,"-------------------------------");
+  console.log(typeof(products))
+
+//   course1={useremail:mailid,
+//             bookname:specificdata.bookname,
+//             price:specificdata.price
+//         }
+//     const ressee=coursestr.create(course1)
+//     console.log(ressee)
+    //const dbres1=await reg.create(user)
+     storeitem=products.map((prod1)=>({
+            useremail:prod1.useremail,
+            id:prod1.id,
+            catdivd:prod1.catdivd,
+            nameofthecourse:prod1.nameofthecourse,
+            imgsrc:prod1.imgsrc,
+            date:prod1.date,
+            cat1:prod1.cat1,
+            participants:prod1.participants,
+            cat2:prod1.cat2,
+            duration:prod1.duration,
+            cat3:prod1.cat3,
+            price:prod1.price
+
+}))
+    
+
+
+const lineItems = products.map((prod) => ({
+    price_data: {
+        currency: "inr",
+        product_data: {
+            name: prod.nameofthecourse,
+        },
+        unit_amount: prod.price,
+    },
+    quantity: 1,
+}));
+    
+    
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: lineItems,
+      mode: "payment",
+      
+      success_url: "https://clonebackend-koqz.onrender.com/Success",
+      cancel_url: "https://clonebackend-koqz.onrender.com/Cancel",
+    });
+
+    res.json({ id: session.id });
+    const ressee=coursestr.create(storeitem[0])
+    console.log(ressee)
+  } catch (error) {
+    console.error('Error creating checkout session:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+app1.get("/Success",(req,res)=>{
+    
+    return res.send(htmlsuccesspage)
+   
+})
+app1.get("/Cancel",(req,res)=>{
+    return res.send({msg:"cancel"})
+})
+
+app1.get("/bought",async (req,res)=>{
+    const buyingcourses=await coursetype.find({useremail:{$eq:course1}})
+    console.log(buyingcourses)
+    
+    return res.send(buyingcourses)
+})
+
+
 
 
 module.exports={app1}
