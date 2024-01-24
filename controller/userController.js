@@ -11,12 +11,12 @@ const app1=express.Router()
 
 
 app1.use(cors())
-const stripe=require("stripe")("sk_test_51OK7daSAg3lXy8qLZhheRgo3J3APhi6R52IAFx3uP0NwcRhA5MXL1WkNx9p73iwoMSHmNRsEJ6LyVwnhkcrQYGIB00X6Jf63tM")
+// const stripe=require("stripe")("sk_test_51OK7daSAg3lXy8qLZhheRgo3J3APhi6R52IAFx3uP0NwcRhA5MXL1WkNx9p73iwoMSHmNRsEJ6LyVwnhkcrQYGIB00X6Jf63tM")
 const saltround=10
 const secretkey="cloneProject"
 
-const course1=""
-const storeItem=""
+// const course1=""
+// const storeItem=""
 
 app1.get("/courses",async (req,res)=>{
     for(let i=0;i<Prepcourses.length;i++){
@@ -40,7 +40,7 @@ app1.post("/books", (req,res)=>{
 
 
 
-router1.post("/register",async (req,res)=>{
+app1.post("/register",async (req,res)=>{
     const user=req.body;
     try{
     const samemail=await registerSchema.findOne({email:{$eq:user.email}})
@@ -68,7 +68,7 @@ catch(error){
 })
 
 
-router1.post("/login",async (req,res)=>{
+app1.post("/login",async (req,res)=>{
     const logindetails= await req.body;
 
     try{    
@@ -112,7 +112,7 @@ catch(error){
 
 
 
-router1.get("/auth",auther,async (req, res) => {
+app1.get("/auth",auther,async (req, res) => {
     const user = req.user;
     console.log(user);
     if (user && user.useremail) {
