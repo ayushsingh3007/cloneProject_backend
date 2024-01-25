@@ -1,6 +1,6 @@
 const mongoose=require("mongoose")
 mongoose.set("strictQuery",true);
-const mongocloudUrl="mongodb+srv://ayushsingh6394:mrayush123@cluster0.3caz3os.mongodb.net/";
+const mongocloudUrl="mongodb+srv://ayushsingh3007:mrayush123@cluster0.xxglaeu.mongodb.net/?retryWrites=true&w=majority";
 const Connection=async ()=>{
     try{
         await mongoose.connect(mongocloudUrl);

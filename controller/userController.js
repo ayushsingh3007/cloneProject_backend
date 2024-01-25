@@ -17,8 +17,8 @@ const stripe=require('stripe')("sk_test_51OK7daSAg3lXy8qLZhheRgo3J3APhi6R52IAFx3
 const saltround=10
 const secretkey="cloneProject"
 
-// const course1=""
-// const storeItem=""
+const course1=""
+const storeItem=""
 
 app1.get("/courses",async (req,res)=>{
     for(let i=0;i<Prepcourses.length;i++){
@@ -209,7 +209,7 @@ app1.post("/createcheckout1", async (req, res) => {
 //     const ressee=coursestr.create(course1)
 //     console.log(ressee)
     //const dbres1=await reg.create(user)
-     storeitem=products.map((prod1)=>({
+     storeItem=products.map((prod1)=>({
             useremail:prod1.useremail,
             id:prod1.id,
             catdivd:prod1.catdivd,
