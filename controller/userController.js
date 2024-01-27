@@ -9,16 +9,17 @@ const bcrypt=require('bcryptjs')
 const Prepcourses = require('./data')
 const cors=require('cors')
 const { coursetype } = require('../schema/courseSchema')
+
+
 const app1=express.Router()
-
-
 app1.use(cors())
+
 const stripe=require('stripe')("sk_test_51OK7daSAg3lXy8qLZhheRgo3J3APhi6R52IAFx3uP0NwcRhA5MXL1WkNx9p73iwoMSHmNRsEJ6LyVwnhkcrQYGIB00X6Jf63tM")
 const saltround=10
 const secretkey="cloneProject"
 
-const course1=""
-const storeItem=""
+let course1=""
+let storeItem=""
 
 app1.get("/courses",async (req,res)=>{
     for(let i=0;i<Prepcourses.length;i++){
@@ -56,7 +57,7 @@ app1.post("/register",async (req,res)=>{
         console.log(user.password)
         const dbres1=await registerSchema.create(user)
         console.log(dbres1)
-        const token= jwt.sign({user:user.email},secretkey,{expiresIn:'300000'})
+        const token= jwt.sign({user:user.email},secretkey,{expiresIn:'365d'})
         console.log(token)
         // arr.push(user)
         
@@ -90,7 +91,7 @@ app1.post("/login",async (req,res)=>{
             if(comparedetails)
 
                 {
-                    const token = jwt.sign({ useremail: logindetails.email }, secretkey, { expiresIn: "360000" });
+                    const token = jwt.sign({ useremail: logindetails.email }, secretkey, { expiresIn: "365d" });
                     console.log("token:", token);
                     return res.send({ msg: "your login successfully", token: token, userdetail: validmaildetails });
         
@@ -114,7 +115,7 @@ catch(error){
 
 
 
-app1.get("/auth",auther,async (req, res) => {
+app1.get("/auth",async (req, res) => {
     const user = req.user;
     console.log(user);
     if (user && user.useremail) {
@@ -136,7 +137,6 @@ app1.get("/auth",auther,async (req, res) => {
 })
 
 
-
 app1.get("/mobdata",async (req,res)=>{
     
    
@@ -146,7 +146,7 @@ app1.get("/mobdata",async (req,res)=>{
     return res.send(dbres4)
 })
 
-//const stripe = require('stripe')('your_stripe_secret_key'); // Replace with your actual Stripe secret key
+
 const htmlsuccesspage = `
 <!DOCTYPE html>
 <html lang="en">
@@ -184,7 +184,7 @@ const htmlsuccesspage = `
 <div>
     <h1>Payment successfull and course confirmed</h1>
     <div>
-    // <a href="https://moonlit-cranachan-da39c6.netlify.app/">
+    
      <button className=" bot1"><NavLink to="/">continue with your course</NavLink></button>
     </div>
     </div>
@@ -246,12 +246,12 @@ const lineItems = products.map((prod) => ({
       line_items: lineItems,
       mode: "payment",
       
-      success_url: "https://clonebackend-koqz.onrender.com/Success",
-      cancel_url: "https://clonebackend-koqz.onrender.com/Cancel",
+      success_url: "http://localhost:4200/Success",
+      cancel_url: "http://localhost:4200/Cancel",
     });
 
     res.json({ id: session.id });
-    const ressee=coursetype.create(storeitem[0])
+    const ressee=coursetype.create(storeItem[0])
     console.log(ressee)
   } catch (error) {
     console.error('Error creating checkout session:', error);

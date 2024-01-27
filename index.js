@@ -3,7 +3,7 @@ const app=express()
 const cors=require('cors')
 const port=4200
 const bodyparser=require('body-parser')
-const stripe=require("stripe")("sk_test_51OMERySJb30zHYKXRtntVAOMPx8ClokJnGOlIPN1IBbaP06OUAf0e4jFlBPAnUsEPy6uK7zORnT48RFKNRH14DC2002ZAtE6HX")
+const stripe=require("stripe")("sk_test_51OK7daSAg3lXy8qLZhheRgo3J3APhi6R52IAFx3uP0NwcRhA5MXL1WkNx9p73iwoMSHmNRsEJ6LyVwnhkcrQYGIB00X6Jf63tM")
 
 const { Connection } = require('./dbConnection/dbConnection')
 const { app1 } = require('./controller/userController')
