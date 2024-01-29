@@ -246,8 +246,8 @@ const lineItems = products.map((prod) => ({
       line_items: lineItems,
       mode: "payment",
       
-      success_url: "https://clonebackend-koqz.onrender.com/dashboard",
-      cancel_url: "https://clonebackend-koqz.onrender.com/",
+      success_url: "https://clone-project-frontend.vercel.app/dashboard",
+      cancel_url: "https://clone-project-frontend.vercel.app/",
     });
 
     res.json({ id: session.id });
