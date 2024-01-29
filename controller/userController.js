@@ -246,8 +246,8 @@ const lineItems = products.map((prod) => ({
       line_items: lineItems,
       mode: "payment",
       
-      success_url: "http://localhost:4200/Success",
-      cancel_url: "http://localhost:4200/Cancel",
+      success_url: "https://clonebackend-koqz.onrender.com/dashboard",
+      cancel_url: "https://clonebackend-koqz.onrender.com/",
     });
 
     res.json({ id: session.id });
